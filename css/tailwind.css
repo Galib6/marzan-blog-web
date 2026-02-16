@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/forms";
+@plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @source '../node_modules/pliny';
 @custom-variant dark (&:where(.dark, .dark *));
@@ -7,22 +7,23 @@
 /* Core theme configuration */
 @theme {
   /* Font families */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+  --font-sans:
+    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   /* Colors */
-  /* Copied from https://tailwindcss.com/docs/theme#default-theme-variable-reference */
-  --color-primary-50: oklch(0.971 0.014 343.198);
-  --color-primary-100: oklch(0.948 0.028 342.258);
-  --color-primary-200: oklch(0.899 0.061 343.231);
-  --color-primary-300: oklch(0.823 0.12 346.018);
-  --color-primary-400: oklch(0.718 0.202 349.761);
-  --color-primary-500: oklch(0.656 0.241 354.308);
-  --color-primary-600: oklch(0.592 0.249 0.584);
-  --color-primary-700: oklch(0.525 0.223 3.958);
-  --color-primary-800: oklch(0.459 0.187 3.815);
-  --color-primary-900: oklch(0.408 0.153 2.432);
-  --color-primary-950: oklch(0.284 0.109 3.907);
+  /* primary color palette changed to black & white theme — light mode uses black accents, dark mode overrides below */
+  --color-primary-50: #ffffff;
+  --color-primary-100: #f8f8f8;
+  --color-primary-200: #f2f2f2;
+  --color-primary-300: #e6e6e6;
+  --color-primary-400: #cccccc;
+  --color-primary-500: #000000; /* main accent in light mode */
+  --color-primary-600: #111111;
+  --color-primary-700: #222222;
+  --color-primary-800: #333333;
+  --color-primary-900: #111111;
+  --color-primary-950: #0b0b0b;
 
   --color-gray-50: oklch(0.985 0.002 247.839);
   --color-gray-100: oklch(0.967 0.003 264.542);
@@ -78,6 +79,21 @@
   }
 }
 
+/* Dark-mode override for primary palette — primary accents become white */
+.dark {
+  --color-primary-50: #0b0b0b;
+  --color-primary-100: #0f0f0f;
+  --color-primary-200: #141414;
+  --color-primary-300: #1c1c1c;
+  --color-primary-400: #e6e6e6;
+  --color-primary-500: #ffffff; /* main accent in dark mode */
+  --color-primary-600: #f3f3f3;
+  --color-primary-700: #eaeaea;
+  --color-primary-800: #e1e1e1;
+  --color-primary-900: #d6d6d6;
+  --color-primary-950: #c9c9c9;
+}
+
 @layer utilities {
   .prose {
     & a {
@@ -102,6 +118,7 @@
   }
 
   .prose-invert {
+    /* in dark mode we want primary accents to be white */
     & a {
       color: var(--color-primary-500);
       &:hover {
