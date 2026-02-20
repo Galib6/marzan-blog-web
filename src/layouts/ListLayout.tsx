@@ -1,12 +1,12 @@
 'use client'
 
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import type { CoreContent } from '@/lib/types'
 import { usePathname } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
 import { useState } from 'react'
+import Link from 'src/components/Link'
+import Tag from 'src/components/Tag'
+import type { CoreContent } from 'src/lib/types'
 
 interface PaginationProps {
   totalPages: number

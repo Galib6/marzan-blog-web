@@ -1,9 +1,9 @@
 import siteMetadata from '@/data/siteMetadata'
-import ListLayout from '@/layouts/ListLayoutWithTags'
-import { getPostsByTag } from '@/lib/blog-data'
 import { genPageMetadata } from 'app/seo'
 import tagData from 'app/tag-data.json'
 import { Metadata } from 'next'
+import ListLayout from 'src/layouts/ListLayoutWithTags'
+import { getPostsByTag } from 'src/lib/blog-data'
 
 const POSTS_PER_PAGE = 5
 

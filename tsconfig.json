@@ -19,8 +19,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/data/*": ["data/*"],
-      "@/layouts/*": ["layouts/*"],
-      "@/lib/*": ["lib/*"],
+      "@/layouts/*": ["src/layouts/*"],
+      "@/lib/*": ["src/lib/*"],
       "@/css/*": ["css/*"],
       "pliny/*": ["node_modules/pliny/*"]
     },

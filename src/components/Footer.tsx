@@ -1,6 +1,7 @@
-import SocialIcon from '@/components/social-icons'
+
 import siteMetadata from '@/data/siteMetadata'
 import Link from './Link'
+import SocialIcon from './social-icons'
 
 export default function Footer() {
   return (

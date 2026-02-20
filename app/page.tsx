@@ -1,15 +1,25 @@
-import { getAllPosts } from '@/lib/blog-data'
-import Main from './Main'
+import { getArticles } from 'src/@api/article/service'
+import Main from '../src/components/Main'
 
-export default async function Page() {
-  const posts = getAllPosts().map((post) => ({
-    slug: post.slug,
-    date: post.date,
-    title: post.title,
-    summary: post.summary,
-    tags: post.tags,
-    language: 'en',
-    draft: post.draft,
-  }))
-  return <Main posts={posts} />
+const POSTS_PER_PAGE = 10
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>
+}) {
+  const params = await searchParams
+  const currentPage = Math.max(1, parseInt(params.page ?? '1', 10) || 1)
+
+  const res = await getArticles({ page: currentPage, limit: POSTS_PER_PAGE })
+  const posts = res.data ?? []
+  const total = res.meta?.total ?? 0
+  const totalPages = Math.ceil(total / POSTS_PER_PAGE)
+
+  return (
+    <Main
+      posts={posts}
+      pagination={{ currentPage, totalPages }}
+    />
+  )
 }

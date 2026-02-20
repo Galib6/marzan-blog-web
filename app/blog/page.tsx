@@ -1,6 +1,6 @@
 import { genPageMetadata } from 'app/seo'
-import { getAllPosts } from '@/lib/blog-data'
-import ListLayout from '@/layouts/ListLayoutWithTags'
+import ListLayout from 'src/layouts/ListLayoutWithTags'
+import { getAllPosts } from 'src/lib/blog-data'
 
 const POSTS_PER_PAGE = 5
 

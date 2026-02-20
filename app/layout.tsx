@@ -1,14 +1,13 @@
-import 'css/tailwind.css'
-import 'pliny/search/algolia.css'
-
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
+import 'css/tailwind.css'
 import { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchConfig, SearchProvider } from 'pliny/search'
+import 'pliny/search/algolia.css'
+import Footer from 'src/components/Footer'
+import Header from 'src/components/Header'
+import SectionContainer from 'src/components/SectionContainer'
 import { ThemeProviders } from './theme-providers'
 
 const space_grotesk = Space_Grotesk({

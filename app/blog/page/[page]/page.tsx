@@ -1,6 +1,6 @@
-import ListLayout from '@/layouts/ListLayoutWithTags'
-import { getAllPosts } from '@/lib/blog-data'
 import { notFound } from 'next/navigation'
+import ListLayout from 'src/layouts/ListLayoutWithTags'
+import { getAllPosts } from 'src/lib/blog-data'
 
 const POSTS_PER_PAGE = 5
 

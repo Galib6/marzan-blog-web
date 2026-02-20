@@ -1,19 +1,30 @@
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
+
 import siteMetadata from '@/data/siteMetadata'
 import topics from '@/data/topicsData'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 import { formatDate } from 'pliny/utils/formatDate'
-
-const MAX_DISPLAY = 5
+import Link from 'src/components/Link'
+import Tag from 'src/components/Tag'
 
 function estimateReadMinutes(text = '') {
   const words = text.trim().split(/\s+/).filter(Boolean).length
   return Math.max(1, Math.round(words / 200))
 }
 
-export default function Home({ posts }) {
+interface PaginationProps {
+  currentPage: number
+  totalPages: number
+}
+
+export default function Home({
+  posts,
+  pagination,
+}: {
+  posts: any[]
+  pagination: PaginationProps
+}) {
   const featured = posts.slice(0, 4)
+  const { currentPage, totalPages } = pagination
 
   return (
     <>
@@ -33,7 +44,7 @@ export default function Home({ posts }) {
           <main className="lg:col-span-8">
             <ul className="space-y-16">
               {!posts.length && 'No posts found.'}
-              {posts.slice(0, MAX_DISPLAY).map((post) => {
+              {posts.map((post) => {
                 const { slug, date, title, summary, tags } = post
                 const mins = estimateReadMinutes(summary)
                 return (
@@ -82,6 +93,38 @@ export default function Home({ posts }) {
                 )
               })}
             </ul>
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <nav className="mt-12 flex items-center justify-between" aria-label="Pagination">
+                {currentPage > 1 ? (
+                  <Link
+                    href={currentPage - 1 === 1 ? '/' : `/?page=${currentPage - 1}`}
+                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+                    rel="prev"
+                  >
+                    &larr; Previous
+                  </Link>
+                ) : (
+                  <span className="cursor-not-allowed text-gray-400">&larr; Previous</span>
+                )}
+
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  Page {currentPage} of {totalPages}
+                </span>
+
+                {currentPage < totalPages ? (
+                  <Link
+                    href={`/?page=${currentPage + 1}`}
+                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-medium"
+                    rel="next"
+                  >
+                    Next &rarr;
+                  </Link>
+                ) : (
+                  <span className="cursor-not-allowed text-gray-400">Next &rarr;</span>
+                )}
+              </nav>
+            )}
           </main>
 
           {/* Sidebar: Featured (on mobile this appears after main) */}
@@ -133,17 +176,15 @@ export default function Home({ posts }) {
         </div>
       </div>
 
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base leading-6 font-medium">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
+      <div className="flex justify-end text-base leading-6 font-medium">
+        <Link
+          href="/blog"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="All posts"
+        >
+          All Posts &rarr;
+        </Link>
+      </div>
 
       {siteMetadata.newsletter?.provider && (
         <div className="flex items-center justify-center pt-4">

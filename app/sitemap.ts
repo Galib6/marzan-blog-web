@@ -1,6 +1,6 @@
 import siteMetadata from '@/data/siteMetadata'
-import { getAllPosts } from '@/lib/blog-data'
 import { MetadataRoute } from 'next'
+import { getAllPosts } from 'src/lib/blog-data'
 
 export const dynamic = 'force-static'
 

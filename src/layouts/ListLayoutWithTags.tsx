@@ -1,13 +1,14 @@
 'use client'
 
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
+import Link from 'src/components/Link'
+
 import siteMetadata from '@/data/siteMetadata'
-import type { CoreContent } from '@/lib/types'
 import tagData from 'app/tag-data.json'
 import { slug } from 'github-slugger'
 import { usePathname } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
+import Tag from 'src/components/Tag'
+import type { CoreContent } from 'src/lib/types'
 
 interface PaginationProps {
   totalPages: number

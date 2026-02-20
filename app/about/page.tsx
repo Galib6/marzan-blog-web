@@ -1,6 +1,7 @@
 import { genPageMetadata } from 'app/seo'
-import SectionContainer from '@/components/SectionContainer'
+
 import Image from 'next/image'
+import SectionContainer from 'src/components/SectionContainer'
 
 export const metadata = genPageMetadata({ title: 'About' })
 

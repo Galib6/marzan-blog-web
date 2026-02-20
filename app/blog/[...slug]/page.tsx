@@ -1,16 +1,15 @@
+import siteMetadata from '@/data/siteMetadata'
 import 'css/prism.css'
 import 'katex/dist/katex.css'
-
-import EditorJSRenderer from '@/components/EditorJSRenderer'
-import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
-import { getAllPosts, getPostBySlug } from '@/lib/blog-data'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
+import EditorJSRenderer from 'src/components/EditorJSRenderer'
+import Link from 'src/components/Link'
+import PageTitle from 'src/components/PageTitle'
+import SectionContainer from 'src/components/SectionContainer'
+import Tag from 'src/components/Tag'
+import { getAllPosts, getPostBySlug } from 'src/lib/blog-data'
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>

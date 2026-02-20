@@ -1,6 +1,7 @@
-import Image from '@/components/Image'
-import SocialIcon from '@/components/social-icons'
+
+import Image from 'next/image'
 import { ReactNode } from 'react'
+import SocialIcon from 'src/components/social-icons'
 
 interface AuthorContent {
   name: string
