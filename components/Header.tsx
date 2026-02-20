@@ -3,6 +3,7 @@
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
 import siteMetadata from '@/data/siteMetadata'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from './Link'
 import MobileNav from './MobileNav'
@@ -24,6 +25,8 @@ const Header = () => {
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
+
+  const pathname = usePathname()
 
   return (
     <header className={headerClass}>
@@ -71,15 +74,24 @@ const Header = () => {
         <nav>
           <div className="no-scrollbar hidden w-full items-center overflow-x-auto py-3 text-sm font-medium tracking-widest uppercase sm:flex">
             <div className="flex items-center space-x-8">
-              {headerNavLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  className="hover:text-primary-500 dark:hover:text-primary-400 text-sm font-medium tracking-widest text-gray-900 dark:text-gray-100"
-                >
-                  {link.title}
-                </Link>
-              ))}
+              {headerNavLinks.map((link) => {
+                const isActive =
+                  link.href === '/' ? pathname === '/' : pathname.startsWith(link.href)
+
+                return (
+                  <Link
+                    key={link.title}
+                    href={link.href}
+                    className={`hover:text-primary-500 dark:hover:text-primary-400 text-sm font-bold tracking-widest ${isActive
+                      ? 'text-primary-500 dark:text-primary-400'
+                      : 'text-gray-600 dark:text-gray-100'
+                      }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {link.title}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </nav>

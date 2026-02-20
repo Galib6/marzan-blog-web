@@ -3,6 +3,7 @@
 import headerNavLinks from '@/data/headerNavLinks'
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { usePathname } from 'next/navigation'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import Link from './Link'
 
@@ -10,6 +11,12 @@ const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const navRef = useRef(null)
+  const pathname = usePathname()
+
+  const isActiveLink = (href: string) => {
+    if (href === '/') return pathname === '/'
+    return pathname.startsWith(href)
+  }
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -79,16 +86,21 @@ const MobileNav = () => {
                 ref={navRef}
                 className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pt-2 pl-12 text-left"
               >
-                {headerNavLinks.map((link) => (
-                  <Link
-                    key={link.title}
-                    href={link.href}
-                    className="hover:text-primary-500 dark:hover:text-primary-400 mb-4 py-2 pr-4 text-2xl font-bold tracking-widest text-gray-900 outline outline-0 dark:text-gray-100"
-                    onClick={onToggleNav}
-                  >
-                    {link.title}
-                  </Link>
-                ))}
+                {headerNavLinks.map((link) => {
+                  const active = isActiveLink(link.href)
+                  return (
+                    <Link
+                      key={link.title}
+                      href={link.href}
+                      className={`hover:text-primary-500 dark:hover:text-primary-400 mb-4 py-2 pr-4 text-2xl font-bold tracking-widest outline outline-0 ${active ? 'text-primary-500 dark:text-primary-400' : 'text-gray-900 dark:text-gray-100'
+                        }`}
+                      onClick={onToggleNav}
+                      aria-current={active ? 'page' : undefined}
+                    >
+                      {link.title}
+                    </Link>
+                  )
+                })}
 
                 {/* Auth link in mobile menu */}
                 <Link
